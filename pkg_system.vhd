@@ -19,5 +19,33 @@ package pkg_system is
         "00000", "11000", "00010", "00111", "01011", "10100", "01101", "10110"  -- 0, 24, 2, 7, 11, 20, 13, 22
     );
 
+    function hex_to_7seg(hex : std_logic_vector(3 downto 0)) return std_logic_vector;
 end package pkg_system;
+
+package body pkg_system is
+    function hex_to_7seg(hex : std_logic_vector(3 downto 0)) return std_logic_vector is
+        variable seg : std_logic_vector(6 downto 0);
+    begin
+        case hex is
+            when x"0" => seg := "1000000";
+            when x"1" => seg := "1111001";
+            when x"2" => seg := "0100100";
+            when x"3" => seg := "0110000";
+            when x"4" => seg := "0011001";
+            when x"5" => seg := "0010010";
+            when x"6" => seg := "0000010";
+            when x"7" => seg := "1111000";
+            when x"8" => seg := "0000000";
+            when x"9" => seg := "0010000";
+            when x"A" => seg := "0001000";
+            when x"B" => seg := "0000011";
+            when x"C" => seg := "1000110";
+            when x"D" => seg := "0100001";
+            when x"E" => seg := "0000110";
+            when x"F" => seg := "0001110";
+            when others => seg := "1111111";
+        end case;
+        return seg;
+    end function;
+end package body pkg_system;
 
