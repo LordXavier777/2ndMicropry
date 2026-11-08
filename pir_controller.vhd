@@ -1,3 +1,9 @@
+-- NOTA DE ESCALAMIENTO PARA SIMULACIÓN (TESTBENCH):
+-- Para síntesis física en la FPGA a 50 MHz, el filtro opera con 1,000,000 
+-- de ciclos (20 ms) y el temporizador continuo con 100,000,000 (2 s)
+-- Exclusivamente durante la validación en ModelSim (tb_top_system), estos 
+-- umbrales se escalan temporalmente a 4 y 15 ciclos respectivamente para 
+-- evitar el desbordamiento de memoria del simulador sin alterar la lógica
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -45,7 +51,7 @@ begin
                     count <= (others => '0');
                 else
                     count <= count + 1;
-                    if count = 1000000 then 
+                    if count = 1000000 then -- Simulacion: Cambiar temporalmente a 4
                         btn_stable <= sync2;
                         count <= (others => '0');
                     end if;
@@ -64,10 +70,10 @@ begin
                     
                 elsif btn_stable = '1' then        -- para el caso de presencia continua
                     
-                    count_2s <= count_2s + 1;
+                    count_2s <= count_2s + 1;      -- para que la unit_control siga rotando la memoria ram, se cuentan dos segundos
                     
-                    if count_2s = 100000000 then    -- para que la unit_control siga rotando la memoria ram, se cuentan dos segundos
-                        pir_pulse <= '1';              
+                    if count_2s = 100000000 then   --Simulación: Se cambia temporalmente a 15
+                        pir_pulse <= '1';           
                         count_2s <= (others => '0'); 
                     end if;
                     
