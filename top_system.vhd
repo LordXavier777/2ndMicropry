@@ -5,18 +5,18 @@ use work.pkg_system.all;
 
 entity top_system is
     port(
-        clk      : in std_logic;
-        rst      : in std_logic; 
-        pir_det  : in std_logic; 
+        clk      : in std_logic; -- Reloj FPGA
+        rst      : in std_logic; -- Boton de reinicio
+        pir_det  : in std_logic; -- Pulso que recibe del sensor
         disp0    : out std_logic_vector(6 downto 0);
         disp1    : out std_logic_vector(6 downto 0);
-        disp2    : out std_logic_vector(6 downto 0);
+        disp2    : out std_logic_vector(6 downto 0); -- Salidas para cada display
         disp3    : out std_logic_vector(6 downto 0)
     );
 end entity top_system;
 
 architecture structural of top_system is
-    signal sig_pir_pls  : std_logic;
+    signal sig_pir_pls  : std_logic;              -- señales internas para transportar pulsos, direcciones y palabras de 16 bits entre los modulos
     signal sig_we_ram   : std_logic;
     signal sig_rom_addr : std_logic_vector(ROM_ADDR_WIDTH-1 downto 0);
     signal sig_ram_addr : std_logic_vector(RAM_ADDR_WIDTH-1 downto 0);
@@ -59,8 +59,8 @@ begin
             data_out => sig_ram_data
         );
         
-    disp0 <= hex_to_7seg(sig_ram_data(3 downto 0));
-    disp1 <= hex_to_7seg(sig_ram_data(7 downto 4));
+    disp0 <= hex_to_7seg(sig_ram_data(3 downto 0)); -- Se divide el bus de datos de salida de la RAM en 4 segmentos de 4 bits
+    disp1 <= hex_to_7seg(sig_ram_data(7 downto 4)); -- para poder utilizar la funcion de convertir hexadecimal a 7 segmentos
     disp2 <= hex_to_7seg(sig_ram_data(11 downto 8));
     disp3 <= hex_to_7seg(sig_ram_data(15 downto 12));
 

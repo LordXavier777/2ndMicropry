@@ -5,24 +5,24 @@ use work.pkg_system.all;
 
 entity rom_memory is
     port(
-        clk      : in std_logic;
-        rom_addr : in std_logic_vector(ROM_ADDR_WIDTH-1 downto 0);
-        rom_data : out std_logic_vector(DATA_WIDTH-1 downto 0)
+        clk      : in std_logic; -- Reloj (FPGA)
+        rom_addr : in std_logic_vector(ROM_ADDR_WIDTH-1 downto 0); --Direccion para la matriz que recibe del control_unit
+        rom_data : out std_logic_vector(DATA_WIDTH-1 downto 0) -- Bus de datos que entrega a la RAM
     );
 end entity rom_memory;
 
 architecture rtl of rom_memory is
-    constant ROM_CONTENT : rom_array := (
-        0 => x"1A2B", 1 => x"3C4D", 2 => x"5E6F", 3 => x"789A",
-        4 => x"BCDE", 5 => x"F012", 6 => x"3456", 7 => x"7890",
-        8 => x"A1B2", 9 => x"C3D4", 10=> x"E5F6", 11=> x"0987",
-        12=> x"FACE", 13=> x"B00C", 14=> x"D00D", 15=> x"CAFE"
+    constant ROM_CONTENT : rom_array := (   -- Es la matriz predefinida con los codigos (identificadores) para cada fila
+        0 => x"1A2B", 1 => x"3C4D", 2 => x"5E6F", 3 => x"777A",
+        4 => x"BCDE", 5 => x"F012", 6 => x"9E4C", 7 => x"FEFE",
+        8 => x"A1B2", 9 => x"DEAF", 10=> x"E5F6", 11=> x"1111",
+        12=> x"FACE", 13=> x"B0B0", 14=> x"D00D", 15=> x"CAFE"
     );
 begin
     process(clk)
     begin
         if rising_edge(clk) then
-            rom_data <= ROM_CONTENT(to_integer(unsigned(rom_addr)));
-        end if;
+            rom_data <= ROM_CONTENT(to_integer(unsigned(rom_addr))); --Lectura sincrónica sin reset ya que simplente entrega el dato alojado
+        end if;                                                      -- en el bus de direcciones
     end process;
 end architecture rtl;
