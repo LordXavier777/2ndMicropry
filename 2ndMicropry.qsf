@@ -37,7 +37,7 @@
 
 
 set_global_assignment -name FAMILY "Cyclone III"
-set_global_assignment -name DEVICE AUTO
+set_global_assignment -name DEVICE EP3C16F484C6
 set_global_assignment -name TOP_LEVEL_ENTITY top_system
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:21:56  NOVEMBER 05, 2026"
@@ -55,3 +55,35 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_location_assignment PIN_G21 -to clk
+set_location_assignment PIN_AB16 -to pir_det
+set_location_assignment PIN_F13 -to disp0[6]
+set_location_assignment PIN_F12 -to disp0[5]
+set_location_assignment PIN_G12 -to disp0[4]
+set_location_assignment PIN_H13 -to disp0[3]
+set_location_assignment PIN_H12 -to disp0[2]
+set_location_assignment PIN_F11 -to disp0[1]
+set_location_assignment PIN_E11 -to disp0[0]
+set_location_assignment PIN_A15 -to disp1[6]
+set_location_assignment PIN_E14 -to disp1[5]
+set_location_assignment PIN_B14 -to disp1[4]
+set_location_assignment PIN_A14 -to disp1[3]
+set_location_assignment PIN_C13 -to disp1[2]
+set_location_assignment PIN_B13 -to disp1[1]
+set_location_assignment PIN_A13 -to disp1[0]
+set_location_assignment PIN_F14 -to disp2[6]
+set_location_assignment PIN_B17 -to disp2[5]
+set_location_assignment PIN_A17 -to disp2[4]
+set_location_assignment PIN_E15 -to disp2[3]
+set_location_assignment PIN_B16 -to disp2[2]
+set_location_assignment PIN_A16 -to disp2[1]
+set_location_assignment PIN_D15 -to disp2[0]
+set_location_assignment PIN_G15 -to disp3[6]
+set_location_assignment PIN_D19 -to disp3[5]
+set_location_assignment PIN_C19 -to disp3[4]
+set_location_assignment PIN_B19 -to disp3[3]
+set_location_assignment PIN_A19 -to disp3[2]
+set_location_assignment PIN_F15 -to disp3[1]
+set_location_assignment PIN_B18 -to disp3[0]
+set_location_assignment PIN_F1 -to rst
